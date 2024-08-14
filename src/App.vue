@@ -10,7 +10,8 @@
      <!-- <PersonWatch2></PersonWatch2> -->
      <!-- <PersonWatchEffect ref="children"></PersonWatchEffect>
      <button type="button" @click="showChildren">App展示ref</button> -->
-     <PersonTs a="哈哈" :list="personList"></PersonTs>
+     <!-- <PersonTs></PersonTs> -->
+     <PersonHooks></PersonHooks>
 </template>
 
 <script lang="ts" setup name="App">
@@ -23,6 +24,7 @@ import PersonWatch1 from './components/Person-watch1.vue';
 import PersonWatch2 from './components/Person-watch2.vue';
 import PersonWatchEffect from './components/Person-watchEffect.vue';
 import PersonTs from './components/Person-ts.vue';
+import PersonHooks from './components/Person-hooks.vue';
 
 import { ref, reactive } from 'vue';
 import type { persons } from './types';

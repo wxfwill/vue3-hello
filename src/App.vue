@@ -14,9 +14,9 @@
   <div>
     <h2 class="title">vue测试</h2>
     <div class="nav">
-      <RouterLink to="/" active-class="active">首页</RouterLink>
-      <RouterLink to="/news" active-class="active">新闻</RouterLink>
-      <RouterLink to="/about" active-class="active">关于</RouterLink>
+      <RouterLink to="/home" active-class="active">首页</RouterLink>
+      <RouterLink :to="{name: 'xinwen'}" active-class="active">新闻</RouterLink>
+      <RouterLink :to="{path: '/about'}" active-class="active">关于</RouterLink>
     </div>
     <div class="main-content">
       <RouterView></RouterView>
@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup name="App">
-import { RouterView, RouterLink} from 'vue-router';
+import { RouterView, RouterLink, useRouter} from 'vue-router';
 // import Person from './components/Person.vue';
 // import PersonSetup from './components/Person-setup.vue';
 // import PersonReactive from './components/Person-reactive.vue';
@@ -64,6 +64,11 @@ import { RouterView, RouterLink} from 'vue-router';
 //     PersonWatchEffect
 //   }
 // }
+
+const router = useRouter();
+setTimeout(() => { 
+  router.push('/news');
+}, 3000)
 </script>
 
 

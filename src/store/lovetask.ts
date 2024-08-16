@@ -1,21 +1,37 @@
 import { defineStore } from 'pinia';
+import axios from 'axios';
+import { nanoid } from 'nanoid';
+import { reactive } from 'vue';
 
-export const useTaskStore = defineStore('task', {
-    state: () => {
-        return {
-            dataList: [
-                {
-                    id: 'gg01',
-                    name: '今天你有点怪，哪里怪？怪还看',
-                },
-                {
-                    id: 'gg02',
-                    name: '草莓，蓝莓，蔓越莓，今天想我了没？',
-                },
-                {
-                    id: 'gg03',
-                    name: '心里给你留了一块地，我的死心塌地',
-                }]
-        }
+
+// 选项式API
+// export const useTaskStore = defineStore('task', {
+//     actions: {
+//         getTask() {
+//             axios.get('https://api.uomg.com/api/rand.qinghua?format=json').then(res => {
+//                 console.log(res?.data?.content);
+//                 let obj = { id: nanoid(), name: res?.data?.content };
+//                 this.dataList.unshift(obj);
+//             })
+//         }
+//     },
+//     state: () => {
+//         return {
+//             dataList: JSON.parse(localStorage.getItem('dataList') as string) || []
+//         }
+//     }
+// })
+
+// 组合式API
+export const useTaskStore = defineStore('task', () => {
+    let dataList = reactive(JSON.parse(localStorage.getItem('dataList') as string) || []);
+
+    function getTask() {
+        axios.get('https://api.uomg.com/api/rand.qinghua?format=json').then(res => {
+            console.log(res?.data?.content);
+            let obj = { id: nanoid(), name: res?.data?.content };
+            dataList.unshift(obj);
+        })
     }
+    return { dataList, getTask }
 })

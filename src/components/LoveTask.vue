@@ -2,7 +2,7 @@
   <div class="task">
     <button type="button" @click="add">添加一句</button>
     <ul>
-        <li v-for="item in taskStore.dataList" :key="item.id">
+        <li v-for="item in dataList" :key="item.id">
             {{item.name}}
         </li>
     </ul>
@@ -13,9 +13,12 @@
 import { reactive } from 'vue';
 import axios from 'axios';
 import { nanoid } from 'nanoid';
-import { useTaskStore } from '@/store/lovetask'
+import { useTaskStore } from '@/store/lovetask';
+import {  storeToRefs } from 'pinia';
 
 const taskStore = useTaskStore();
+
+let { dataList } = storeToRefs(taskStore);
 
 // let dataList = reactive([
 //     {
@@ -32,17 +35,25 @@ const taskStore = useTaskStore();
 //     }]);
 
 const add = () => { 
-
-    axios.get('https://api.uomg.com/api/rand.qinghua?format=json').then(res => {
-        console.log(res?.data?.content);
-        let obj = { id: nanoid(), name: res?.data?.content };
-        // dataList.unshift(obj);
-        // dataList.push({
-        //     id: 'gg01',
-        //     name: res.data.data
-        // })
-    })
+    taskStore.getTask();
+    // axios.get('https://api.uomg.com/api/rand.qinghua?format=json').then(res => {
+    //     console.log(res?.data?.content);
+    //     let obj = { id: nanoid(), name: res?.data?.content };
+    //     // dataList.unshift(obj);
+    //     // dataList.push({
+    //     //     id: 'gg01',
+    //     //     name: res.data.data
+    //     // })
+    // })
 }
+
+
+taskStore.$subscribe((mutype, state) => { 
+    console.log('土味情话发生变化==', mutype, state);
+    // dataList.value = 
+    localStorage.setItem('dataList', JSON.stringify(state.dataList))
+    
+})
 </script>
 
 <style scoped>

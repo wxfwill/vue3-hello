@@ -1,15 +1,13 @@
 <template>
 <div>
-  我是App
-  <Count></Count>
-  <LoveTask></LoveTask>
+  <h2>vue3组件通信</h2>
+  <Father></Father>
 </div>
 
 </template>
 
 <script lang="ts" setup name="App">
-import Count from '@/components/Count.vue';
-import LoveTask from '@/components/LoveTask.vue';
+import Father from './comm/Father.vue';
 
 </script>
 

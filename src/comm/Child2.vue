@@ -33,6 +33,8 @@
     background-color: skyblue;
     border-radius: 10px;
     box-shadow: 0 0 10px #ccc;
-    padding: 10px
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box;
 }
 </style>
